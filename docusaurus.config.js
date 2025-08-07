@@ -48,7 +48,6 @@ const config = {
       ({
         docs: {
           sidebarPath: './sidebars.js',
-          routeBasePath: '/',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
@@ -87,12 +86,24 @@ const config = {
         items: [
           {
             type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
+            sidebarId: 'scheduleSidebar',
             position: 'left',
-            label: 'Acceuil',
+            label: 'Échéancier',
           },
-          {to: 'https://archambaultv-prof.github.io/programmation-python/docs/intro', label: 'Programmation Python', position: 'left'},
-          {to: 'https://archambaultv-prof.github.io/git', label: 'Git', position: 'left'},
+          {
+            type: 'docSidebar',
+            sidebarId: 'classNotes',
+            position: 'left',
+            label: 'Notes de cours',
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 'evaluations',
+            position: 'left',
+            label: 'Évaluations',
+          },
+          {to: 'https://archambaultv-prof.github.io/programmation-python/docs/intro', label: 'Programmation Python', position: 'right'},
+          {to: 'https://archambaultv-prof.github.io/git', label: 'Git', position: 'right'},
           {
             href: 'https://github.com/archambaultv-prof/2025E-420-920-MA/',
             label: 'GitHub',
@@ -150,6 +161,11 @@ const config = {
         darkTheme: prismThemes.dracula,
       },
     }),
+  plugins: [
+    [require.resolve('docusaurus-lunr-search'), {
+      languages: ['fr'],
+    }]
+  ]
 };
 
 export default config;
