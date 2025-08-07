@@ -103,9 +103,9 @@ const config = {
             label: 'Évaluations',
           },
           {to: 'https://archambaultv-prof.github.io/programmation-python/docs/intro', label: 'Programmation Python', position: 'right'},
-          {to: 'https://archambaultv-prof.github.io/git', label: 'Git', position: 'right'},
+          {to: 'https://archambaultv-prof.github.io/git', label: 'Tutoriel Git', position: 'right'},
           {
-            href: 'https://github.com/archambaultv-prof/2025E-420-920-MA/',
+            to: 'https://github.com/archambaultv-prof/2025E-420-920-MA/',
             label: 'GitHub',
             position: 'right',
           },
