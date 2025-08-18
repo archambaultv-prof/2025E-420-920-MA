@@ -6,8 +6,136 @@ description: Énoncé du travail pratique 1
 
 # Travail pratique 1
 
-:::warning
+- **Pondération** : 20%
+- **Date de l'énoncé** : 19 août 2025
+- **Date de remise** : 02 septembre 2025 23h59
+- **Remise** : Remettre votre code sur Omnivox. Voir la section [Remise](#remise)
+- **Modalité** : Individuel
 
-Énoncé à venir.
+## Énoncé
 
-:::
+Ce travail pratique va jeter les bases de notre projet
+[PiLedger](../notes_de_cours/piledger.mdx). Voici les étapes à suivre :
+
+1. Créer un projet Python nommé `Piledger`. Ce projet doit être un paquet
+   installable avec `uv` et comporter un script `main` exécutable avec `uv run
+   main`.
+2. La fonction main est en fait une ligne de commande. Les commandes suivantes
+   doivent être implantées et seront expliquées plus bas:
+   - `uv run main check path/to/file/journal.json` : Lit un fichier JSON qui indique où se
+     trouvent les fichiers  `csv` contenants les comptes et les transactions et fait quelques vérifications.
+   - `uv run main balancesheet path/to/file/journal.json`. Imprime, une ligne à la fois, le solde courant de chaque compte
+     qui a le type `actif` ou `passif` et le grand total.
+   - `uv run main incomestatement path/to/file/journal.json`. Imprime, une ligne à la fois, le solde total de chaque compte
+     qui a le type `revenu` ou `dépense` ainsi que le grand total, mais uniquement pour les transactions
+     de cette année (2025).
+
+### Configuration `journal.json`
+
+Le fichier `journal.json` doit être un fichier JSON qui contient les chemins vers les fichiers CSV
+de transactions et de comptes. Voici un exemple de fichier `journal.json` :
+
+```json
+{
+  "transactions": "path/relative/to/this/json/file/transactions.csv",
+  "accounts": "path/relative/to/this/json/file/accounts.csv"
+}
+```
+
+Ces champs sont obligatoires et doivent être lus par votre programme.
+
+### Fichier `accounts.csv`
+
+Le fichier `accounts.csv` contient les comptes. Il comporte une ligne d'en-tête
+et plusieurs lignes de données. Voici un exemple de contenu :
+
+```
+id,name,type
+1001,Compte courant,actif
+2001,Carte de crédit,passif
+3001,Solde d'ouverture,capitaux propres
+4001,Salaire compagnie ABC,revenu
+5001,Nourriture,dépense
+```
+
+Chaque ligne représente un compte avec un identifiant unique, un nom et un type
+(actif, passif, revenu, capitaux propres ou dépense).
+
+### Fichier `transactions.csv`
+
+Le fichier `transactions.csv` contient les transactions. Il comporte une ligne d'en-tête
+et plusieurs lignes de données. Voici un exemple de contenu :
+
+```
+id,date,compte,montant
+1,2025-01-01,Solde d'ouverture,-4000
+1,2025-01-01,Compte courant,4000
+3,2025-01-01,Solde d'ouverture,500
+3,2025-01-01,Carte de crédit,-500
+2,2025-03-03,Carte de crédit,-400
+2,2025-03-03,Nourriture,400
+```
+
+Chaque ligne représente une partie d'une transaction qu'on peut nommer dans le
+code `posting`. Une transaction est donc une liste de `posting` avec le même
+numéro d'identification.
+
+### Fonction `check`
+
+La fonction `check` doit effectuer les vérifications suivantes :
+
+1. **Vérification des comptes** : Tous les comptes référencés dans les
+   transactions doivent exister dans le fichier des comptes (comparaison
+   sensible à la casse).
+2. **Vérification des types** : Tous les types dans le fichier des comptes
+   doivent être valides (actif, passif, revenu, dépense, capitaux propres).
+3. **Vérification de l'équilibrage** : Pour chaque transaction (groupe de
+   postings avec le même `id`), la somme des montants doit être égale à zéro à
+   0.001 près.
+4. **Arrêt à la première erreur** : Le programme doit s'arrêter et afficher un
+   message d'erreur dès qu'une vérification échoue.
+
+### Fonction `balancesheet`
+
+La fonction `balancesheet` doit :
+
+1. Calculer le solde courant de chaque compte ayant le type `actif` ou `passif`
+2. Afficher une ligne par compte avec son solde
+3. Afficher le grand total à la fin
+4. Utiliser des itérateurs pour traiter efficacement de gros fichiers
+
+### Fonction `incomestatement`
+
+La fonction `incomestatement` doit :
+
+1. Calculer le solde total de chaque compte ayant le type `revenu` ou `dépense`
+2. Ne considérer que les transactions de l'année 2025
+3. Afficher une ligne par compte avec son solde
+4. Afficher le grand total à la fin
+5. Utiliser des itérateurs pour traiter efficacement de gros fichiers
+
+### Exigences techniques
+
+- **Utilisation d'itérateurs** : Toutes les fonctions doivent utiliser des
+  itérateurs pour l'efficacité et ne pas charger les fichiers CSV entiers en
+  mémoire
+- **Gestion des floats** : Les calculs doivent pouvoir traiter des nombres à
+  virgule flottante
+- **Arrêt à la première erreur** : Pour la fonction `check`, le programme doit
+  s'arrêter dès qu'une erreur est détectée
+- **Sensibilité à la casse** : La vérification des noms de comptes doit être
+  sensible à la casse
+
+## Architecture du programme
+
+Vous êtes maintenant capable de concevoir l'architecture de votre programme. La qualité du code
+et son arborescence seront évaluées. Vous pouvez bien sûr vous inspirer des pull-requests de [l'exercice de
+révision](https://github.com/archambaultv-prof/2025E-420-920-MA-Revision1).
+
+## Remise
+
+Remettez votre code complet en dossier zippé sur Omnivox avant la date limite.
+
+## Grille d'évaluation
+
+- À venir
