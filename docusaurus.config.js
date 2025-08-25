@@ -80,7 +80,7 @@ const config = {
       navbar: {
         title: 'Concepts de programmation 2',
         logo: {
-          alt: 'My Site Logo',
+          alt: 'Concepts de programmation 2',
           src: 'img/920.svg',
         },
         items: [
