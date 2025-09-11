@@ -6,8 +6,78 @@ description: Énoncé du travail pratique 2
 
 # Travail pratique 2
 
-:::warning
+- **Pondération** : 20%
+- **Date de l'énoncé** : 11 septembre 2025
+- **Date de remise** : 28 septembre 2025 23h59
+- **Modalité** : En équipe de 2
 
-Énoncé à venir.
+## Énoncé
 
-:::
+Ce travail pratique continue le projet
+[PiLedger](../notes_de_cours/piledger.mdx). Voici les étapes à suivre :
+
+1. Accepter l'invitation GitHub classroom envoyée via Omnivox.
+2. Créer votre équipe de deux personnes.
+3. Fusionner votre code du travail pratique 1 et faites une validation (commit)
+dans la branche `main`.
+4. Créer une branche `tp2` à partir de `main`.
+5. Implanter le multithreading pour lire les fichiers dans la branche `tp2`.
+6. Fusionner la branche `tp2` dans `main` via une pull-request.
+
+## Multithreading pour lecture des fichiers
+
+Adapter la configuration pour pouvoir gérer plusieurs fichiers de transactions
+et de comptes. Le fichier `journal.json` doit maintenant ressembler à ceci :
+
+```json
+{
+  "transactions": [
+    "path/relative/to/this/json/file/transactions1.csv",
+    "path/relative/to/this/json/file/transactions2.csv"
+  ],
+  "accounts": [
+    "path/relative/to/this/json/file/accounts1.csv",
+    "path/relative/to/this/json/file/accounts2.csv"
+  ]
+}
+```
+
+Votre application doit maintenant lire tous les fichiers de transactions et de
+comptes et les combiner. Pour ce faire, vous devez utiliser le multithreading
+pour lire les fichiers en parallèle. *La complexité de cette tâche vient du fait
+que vous devez garder les itérateurs.* En d'autres mots,
+seulement la lecture des fichiers doit être faite en parallèle, le reste de
+l'application devrait rester inchangé. Mais cette lecture parallèle doit
+retourner un itérateur combiné.
+
+### Approche pour le multithreading
+
+Voici quelques pistes pour implanter le multithreading de façon efficace :
+
+**Modules et outils recommandés :**
+- Utilisez le module `concurrent.futures`
+- Une file (`queue.Queue`) peut servir de pont entre les
+  threads lecteur de fichier et le thread principal
+- Il peut y avoir une file par type de fichier (transactions et comptes)
+- Pensez à limiter la taille de la file
+
+**Défis techniques à considérer :**
+- Comment signaler la fin de lecture d'un fichier dans un environnement
+  multithread ?
+- Comment maintenir l'intégrité des transactions ? En effet, tous les `posting` d'une même
+  transaction, c'est à dire avec le même `id`, doivent être traités ensemble.
+- Comment créer un itérateur combiné qui respecte l'interface existante de
+  votre application ? Considérez l'utilisation d'une fonction génératrice pour lire
+  les éléments de la file.
+
+L'objectif est de paralléliser uniquement la lecture des fichiers tout en
+préservant le comportement séquentiel du reste de l'application.
+
+## Remise
+
+Votre dépôt GitHub classroom servira de remise. Assurez-vous que votre
+dépôt est à jour et que votre code compile et fonctionne avant la date de remise.
+
+## Grille d'évaluation
+
+Vous pouvez télécharger la grille d'évaluation [ici](pathname:///files/grille_tp2.pdf).
