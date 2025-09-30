@@ -1,0 +1,88 @@
+---
+sidebar_position: 3
+sidebar_label: Exercice Ownership
+description: Exercice pratique sur le concept d'Ownership en Rust
+---
+
+# 🦀 Ownership en Rust
+
+## 🎯 Objectifs pédagogiques
+
+- Comprendre le concept d'ownership (propriété) en Rust
+- Identifier les erreurs liées au transfert de propriété
+- Utiliser les références et le borrowing correctement
+- Résoudre les problèmes de compilation liés à l'ownership
+
+## 🔧 Exercice 1 : Transfert de propriété
+
+### Problème à résoudre
+
+Le code suivant ne compile pas. Identifiez et corrigez les erreurs :
+
+```rust
+fn main() {
+    let message = String::from("Bonjour Rust!");
+    
+    afficher_message(message);
+    println!("Message original: {}", message); // ❌ Erreur ici
+    
+    let longueur = calculer_longueur(message); // ❌ Erreur ici aussi
+    println!("Longueur: {}", longueur);
+}
+
+fn afficher_message(msg: String) {
+    println!("Affichage: {}", msg);
+}
+
+fn calculer_longueur(msg: String) -> usize {
+    msg.len()
+}
+```
+
+### 🤔 Questions de réflexion
+
+1. Pourquoi le code ne compile-t-il pas ?
+2. Que se passe-t-il avec la variable `message` après l'appel à `afficher_message()` ?
+3. Proposez **deux solutions différentes** pour corriger ce problème.
+
+
+## 🔧 Exercice 2 : Références et Borrowing
+
+### Problème à résoudre
+
+Complétez les fonctions suivantes en utilisant les références appropriées :
+
+```rust
+fn main() {
+    let mut texte = String::from("Apprentissage");
+    
+    // TODO: Appelez ces fonctions correctement
+    let longueur = // votre code ici
+    println!("Longueur: {}", longueur);
+    
+    // votre code ici pour ajouter " Rust"
+    println!("Texte modifié: {}", texte);
+    
+    let premier_mot = // votre code ici
+    println!("Premier mot: {}", premier_mot);
+}
+
+// TODO: Complétez la signature de cette fonction
+fn obtenir_longueur(/* paramètres */) -> usize {
+    // TODO: Implémentez
+}
+
+// TODO: Complétez la signature de cette fonction
+fn ajouter_texte(/* paramètres */, ajout: &str) {
+    // TODO: Implémentez
+}
+
+// TODO: Complétez la signature de cette fonction
+fn premier_mot(/* paramètres */) -> &str {
+    // TODO: Implémentez (retourne le texte jusqu'au premier espace)
+}
+```
+
+### 🤔 Questions de réflexion
+
+1. Quelle est la différence entre `&String` et `&str` ?
