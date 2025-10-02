@@ -4,10 +4,74 @@ sidebar_label: Travail pratique 3
 description: Énoncé du travail pratique 3
 ---
 
-# Travail pratique 3
+# 🏰 Travail pratique 3 : Un terminal dont vous êtes le héros
 
-:::warning
+## Modalités
 
-Énoncé à venir.
+- **Pondération** : 20%
+- **Date de l'énoncé** : 2 octobre 2025
+- **Date de remise** : 16 octobre 2025 23h59
+- **En équipe de 2**
 
-:::
+## 📜 Énoncé
+
+Dans ce travail pratique, vous allez créer un jeu textuel dans le terminal
+semblable à l'exercice fait en programmation 1. Voici une description du jeu :
+
+- Le jeu démarre et demande le niveau de difficulté (facile (F), moyen (M) ou difficile (D)).
+- Le joueur commence avec 100 points de vie (PV) et une épée de base.
+- Le but est de vaincre un certain nombre de monstres (5 pour facile, 7 pour moyen, 10 pour difficile).
+- Chaque tour de jeu se déroule en plusieurs étapes :
+  - Un résumé de la situation est affiché.
+  - Le joueur décide de continuer à avancer ou d'utiliser une potion s'il en a.
+  - Si le joueur avance, un événement aléatoire se produit :
+     - Affronter un monstre : le joueur doit combattre le monstre. Le nombre de PV
+       et les dégâts du monstre dépendent du niveau de difficulté et sont générés aléatoirement.
+     - Trouver une potion : le joueur garde cette potion dans son inventaire si possible.
+     - Trouver une épée : le joueur décide de l'équiper ou non.
+     - Trouver un bouclier : le joueur décide de l'équiper ou non.
+  - Si le joueur utilise une potion, il regagne des PV.
+- Le jeu continue jusqu'à ce que le joueur ait vaincu le nombre requis de
+  monstres ou que ses PV tombent à 0.
+
+### ⚔️ Règles de combat
+
+- Lors d'un combat, le joueur et le monstre s'infligent des dégâts à tour de rôle.
+- Le joueur attaque toujours en premier. Il inflige des dégâts selon la formule suivante :
+   $$\text{dégâts} = \text{PV} / 10 + \text{épée}$$
+- Le monstre inflige des dégâts au hasard entre `min_dégâts` et `max_dégâts`
+  selon le niveau de difficulté. Si le joueur a un bouclier, les dégâts du
+  monstre sont réduits par la valeur du bouclier, sans pouvoir descendre en
+  dessous de 0.
+- Le combat continue jusqu'à ce que le joueur ou le monstre ait 0 PV.
+- Pour chaque tour de combat, affichez les PV restants du joueur et du monstre et les
+  dégâts infligés par chacun. Le tout se déroule automatiquement, sans intervention du joueur.
+
+## 🖥️ Aspects techniques
+
+- Le jeu doit être écrit en Rust et s'exécuter dans le terminal.
+- Votre code doit utiliser des `struct` et des `enum` pour modéliser les entités du jeu
+  (joueur, monstre, épée, bouclier, potion, événement aléatoire, etc.)
+- Vous pouvez choisir les valeurs numériques (dégâts, épée, potion, PV, chance
+  d'avoir un événement particulier, etc.) pour équilibrer le jeu comme bon vous
+  semble. Ces valeurs peuvent être codées en dur.
+- Vous devez utiliser la bibliothèque `rand` pour générer des événements aléatoires.
+- Les erreurs d'entrée de l'utilisateur peuvent simplement être gérées avec `expect`.
+- Votre code doit être divisé en plusieurs fonctions pour améliorer la lisibilité et la
+  maintenabilité.
+- Vous pouvez mettre tout votre code dans le fichier `main.rs` ou le diviser en
+  plusieurs modules si vous préférez.
+- Votre projet doit utiliser Cargo et `cargo run` doit fonctionner correctement.
+- Votre code doit compiler sans erreurs et fonctionner comme décrit dans l'énoncé.
+- Votre code doit être bien commenté.
+- Chaque membre de l'équipe doit contribuer de manière significative au projet. La contribution
+  de chaque membre sera évaluée par le biais de l'historique des commits Git.
+
+## 📤 Remise
+
+Votre dépôt GitHub Classroom fera office de remise. Assurez-vous que votre dépôt
+est à jour et que votre code compile et fonctionne avant la date de remise.
+
+## Grille d'évaluation
+
+Voici la [grille d'évaluation](pathname:///files/grille_tp3.pdf) qui sera utilisée pour évaluer votre travail.
